@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ededed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .completed {
+            text-decoration: line-through;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #5cb85c;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Tarefas</h2>
+        <form id="form-tarefa">
+            <input type="text" id="input-tarefa" placeholder="Digite uma nova tarefa" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <ul id="lista-tarefas">
+            <!-- Itens da lista serão adicionados dinamicamente aqui -->
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#form-tarefa").submit(function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+
+                var novaTarefa = $("#input-tarefa").val(); // Captura o valor do input
+                $("#lista-tarefas").append("<li>" + novaTarefa + "</li>"); // Adiciona um novo item na lista
+
+                $("#input-tarefa").val(""); // Limpa o input
+            });
+
+            $("#lista-tarefas").on("click", "li", function() {
+                $(this).toggleClass("completed"); // Adiciona ou remove a classe "completed" ao clicar no item da lista
+            });
+        });
+    </script>
+</body>
+</html>
